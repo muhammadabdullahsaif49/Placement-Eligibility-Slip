@@ -40,6 +40,11 @@ Open http://localhost:3000
 Re-train the model any time with `python train_model.py` — it regenerates
 `model.pkl`, `coefficients.json`, and the chart's dataset sample.
 
+<img width="1920" height="826" alt="screencapture-127-0-0-1-3000-2026-08-17-23_10_04" src="https://github.com/user-attachments/assets/215e77f4-293e-4a77-8e7d-ec7d103deab2" />
+
+
+
+
 ## Deploy to Vercel
 1. Push this folder to a GitHub repo.
 2. Go to https://vercel.com/new and import the repo.
