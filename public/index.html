@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Placement Slip — CGPA & IQ Predictor</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main>
+  <div class="wrap">
+    <header>
+      <div class="header-row">
+        <div>
+          <p class="eyebrow">Office of Campus Placements</p>
+          <h1>Placement Eligibility Slip</h1>
+        </div>
+        <button id="theme-toggle" class="icon-btn" title="Toggle dark mode" type="button">🌙</button>
+      </div>
+      <p class="sub">Submit your CGPA and IQ score to receive an instant, model-generated placement result.</p>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="predict">Predict</button>
+      <button class="tab-btn" data-tab="batch">Batch (CSV)</button>
+      <button class="tab-btn" data-tab="chart">Dataset</button>
+      <button class="tab-btn" data-tab="history">History</button>
+    </nav>
+
+    <!-- Predict tab -->
+    <section id="tab-predict" class="tab-panel active">
+      <form id="predict-form" class="slip">
+        <div class="slip-head">
+          <div>
+            <p class="label">Slip No.</p>
+            <p class="value" id="slip-no"></p>
+          </div>
+          <div class="right">
+            <p class="label">Date</p>
+            <p class="value" id="slip-date"></p>
+          </div>
+        </div>
+
+        <label>
+          <span class="label">CGPA (0&ndash;10)</span>
+          <input type="number" id="cgpa" step="0.01" min="0" max="10" value="7.2" required />
+        </label>
+
+        <label>
+          <span class="label">IQ Score (40&ndash;200)</span>
+          <input type="number" id="iq" step="1" min="40" max="200" value="115" required />
+        </label>
+
+        <button type="submit" id="submit-btn">Submit for Evaluation</button>
+
+        <p id="error-msg" class="error hidden"></p>
+
+        <div id="result" class="result hidden">
+          <div>
+            <p class="label">Model Confidence</p>
+            <p class="confidence" id="confidence-val">0%</p>
+            <p class="result-note" id="result-note"></p>
+            <p class="tip hidden" id="result-tip"></p>
+          </div>
+          <div class="stamp" id="stamp">
+            <span id="stamp-text"></span>
+          </div>
+        </div>
+      </form>
+      <p class="footnote">Prediction from a logistic regression model trained on CGPA &amp; IQ data. For illustrative purposes only.</p>
+    </section>
+
+    <!-- Batch tab -->
+    <section id="tab-batch" class="tab-panel">
+      <div class="slip">
+        <p class="label" style="margin-bottom:0.75rem">Upload a CSV with <code>cgpa</code> and <code>iq</code> columns</p>
+        <input type="file" id="batch-file" accept=".csv" />
+        <button type="button" id="batch-btn" style="margin-top:1rem">Run Batch Prediction</button>
+        <p id="batch-error" class="error hidden"></p>
+        <div id="batch-results" class="batch-results hidden"></div>
+      </div>
+    </section>
+
+    <!-- Chart tab -->
+    <section id="tab-chart" class="tab-panel">
+      <div class="slip">
+        <p class="label" style="margin-bottom:0.75rem">CGPA vs IQ — Placement Distribution</p>
+        <div id="scatter-chart"></div>
+        <div class="chart-legend">
+          <span><i class="dot placed"></i> Placed</span>
+          <span><i class="dot not-placed"></i> Not Placed</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- History tab -->
+    <section id="tab-history" class="tab-panel">
+      <div class="slip">
+        <div class="history-head">
+          <p class="label" style="margin:0">Your Past Predictions</p>
+          <button type="button" id="clear-history" class="link-btn">Clear</button>
+        </div>
+        <div id="history-list" class="history-list"></div>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
